@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  name          String?
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  role          String       @default("USER") // USER, PRESENTER
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  accounts      Account[]
+  progress      Progress?
+  sessions      Session[]
+  submissions   Submission[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Progress {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  atoAtual            Int      @default(1)
+  exerciciosCompletos Int[]    @default([])
+  pontuacaoTotal      Int      @default(0)
+
+  // Pontuações individuais de cada exercício (0-100)
+  pontuacaoEx1        Int      @default(0)
+  pontuacaoEx2        Int      @default(0)
+  pontuacaoEx3        Int      @default(0)
+  pontuacaoEx4        Int      @default(0)
+  pontuacaoEx5        Int      @default(0)
+  pontuacaoEx6        Int      @default(0)
+  pontuacaoEx7        Int      @default(0)
+  pontuacaoEx8        Int      @default(0)
+
+  updatedAt           DateTime @updatedAt
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Submission {
+  id          String   @id @default(cuid())
+  userId      String
+  exercicioId Int
+  resposta    String
+  pontuacao   Int
+  feedback    String
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PalestraSession {
+  id        String   @id @default(cuid())
+  codigo    String   @unique
+  atoAtual  Int      @default(1)
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

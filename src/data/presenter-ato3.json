@@ -1,0 +1,120 @@
+{
+  "atoNumero": 3,
+  "title": "Ato 3 - A Transformação",
+  "tldr": "Demonstrar de forma inegável o impacto real da adoção de Conventional Commits, Git Flow e SemVer: histórico legível, releases previsíveis, rollback seguro, QA confiante e menos stress em produção.",
+  "keyPoints": [
+    "O histórico deixa de ser ruído e passa a ser fonte confiável de verdade",
+    "Changelog passa a ser gerado automaticamente a partir dos commits",
+    "SemVer transforma mudanças técnicas em comunicação clara de risco",
+    "Rollback deixa de ser emergência e passa a ser procedimento",
+    "Debugging torna-se dirigido por versão, não por tentativa e erro",
+    "Aumento direto de previsibilidade para QA, suporte e produto",
+    "Setup rápido (1 dia), benefícios contínuos",
+    "A maturidade do time sobe sem aumentar burocracia"
+  ],
+  "beforeAfter": {
+    "before": [
+      "Commits do tipo 'fix', 'final', 'ajustes diversos'",
+      "Sem tags ou versões claras em produção",
+      "Rollback feito por tentativa",
+      "QA sem saber o que mudou entre deploys",
+      "Changelog manual, atrasado ou inexistente",
+      "Releases geradas com medo",
+      "Hotfixes frequentes e mal documentados"
+    ],
+    "after": [
+      "Commits padronizados, pesquisáveis e rastreáveis",
+      "Versões claras com tags e releases no GitHub",
+      "Rollback com um único comando usando tag",
+      "QA sabe exatamente se a versão é MAJOR, MINOR ou PATCH",
+      "Changelog automático e confiável",
+      "Releases contínuas e previsíveis",
+      "Hotfixes rastreados e absorvidos pelo fluxo normal"
+    ]
+  },
+  "realWorldMetrics": [
+    {
+      "metric": "MTTR (Mean Time To Recovery)",
+      "before": "Horas ou dias",
+      "after": "Minutos",
+      "reason": "Rollback orientado por versão e tag"
+    },
+    {
+      "metric": "Lead Time de Release",
+      "before": "1 a 2 dias",
+      "after": "30 a 60 minutos",
+      "reason": "Changelog e bump de versão automáticos"
+    },
+    {
+      "metric": "Falhas por Merge",
+      "before": "Frequente",
+      "after": "Raro",
+      "reason": "Isolamento por branches e PRs"
+    },
+    {
+      "metric": "Tempo de Onboarding",
+      "before": "Semanas",
+      "after": "Dias",
+      "reason": "Histórico passa a documentar decisões"
+    }
+  ],
+  "storyBeats": [
+    "Relembre rapidamente o log caótico do Ato 1.",
+    "Mostre o novo log estruturado com feat, fix, docs, refactor.",
+    "Faça alguém do time identificar rapidamente uma feature específica no log.",
+    "Mostre uma release real no GitHub com changelog automático.",
+    "Mostre uma tag antiga e simule rollback com segurança.",
+    "Conecte o impacto: QA, produto e suporte interno sentem a diferença.",
+    "Feche com a mensagem: previsibilidade gera velocidade, não lentidão."
+  ],
+  "demo": [
+    "Mostrar o log antigo e pedir ao time para encontrar onde foi feito um certo bug (difícil ou impossível).",
+    "Mostrar o log novo com Conventional Commits e localizar a mesma mudança em segundos.",
+    "Abrir a página de Releases no GitHub e mostrar o changelog auto-gerado.",
+    "Selecionar uma tag antiga e mostrar como seria um rollback seguro via git checkout.",
+    "Mostrar que hotfix agora gera PATCH e não quebra o fluxo."
+  ],
+  "handsOnSteps": [
+    "1) git log (antes): mostrar o histórico caótico e pedir para localizar uma mudança; destacar a dificuldade.",
+    "2) git log (depois): mostrar histórico com Conventional Commits e localizar a mesma mudança rapidamente.",
+    "3) GitHub Releases: abrir uma release gerada automaticamente e ler o changelog (features, fixes, docs).",
+    "4) Rollback: escolher uma tag antiga e simular git checkout <tag> (ou git revert) explicando segurança do processo.",
+    "5) Hotfix: mostrar que um hotfix gera PATCH e é integrado a master + develop, mantendo o fluxo limpo."
+  ],
+  "technicalImpact": [
+    "Rastreabilidade total entre Issue → Branch → Commit → PR → Release → Deploy",
+    "Versionamento automatizado com base em tipo de commit",
+    "Separação clara entre fluxo de entrega e fluxo de emergência",
+    "Eliminação de deploys manuais inseguros",
+    "Base sólida para CI/CD avançado (gates por tipo de mudança)",
+    "Capacidade real de auditoria técnica e compliance"
+  ],
+  "poll": {
+    "question": "Depois de ver este fluxo, quão mais confiante se sentiria ao fazer deploy em produção?",
+    "options": ["Nada mais confiante", "Um pouco mais confiante", "Muito mais confiante"]
+  },
+  "quiz": {
+    "question": "Qual sinal num commit indica obrigatoriamente subida de versão MAJOR?",
+    "options": ["fix", "feat!", "docs"],
+    "answerIndex": 1
+  },
+  "timer": {
+    "label": "Tempo sugerido",
+    "durationSeconds": 720
+  },
+  "callouts": [
+    "Use uma release real do projeto se já existir.",
+    "Mostre um rollback real num ambiente de teste.",
+    "Enfatize que o changelog só é confiável porque os commits agora são confiáveis.",
+    "Mostre que SemVer elimina discussões subjetivas sobre risco.",
+    "Evite discurso teórico — foque em impacto prático."
+  ],
+  "culturalShift": [
+    "O time deixa de trabalhar no escuro",
+    "A responsabilidade passa a ser distribuída pelo processo",
+    "Menos dependência de heróis técnicos",
+    "Mais confiança entre devs, QA e produto",
+    "Menos stress, menos incidentes, mais fluidez"
+  ],
+  "transitionHook": "Se agora já conseguimos trabalhar com previsibilidade… como é que isto se torna o novo padrão oficial da equipa?"
+}

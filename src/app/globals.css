@@ -1,26 +1,320 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Cores Principais - Pantone Azul Escuro */
+  --azul-900: #1a365d;
+  --azul-800: #2a4365;
+  --azul-700: #2c5282;
+  --azul-600: #2b6cb0;
+  --azul-500: #3182ce;
+  --azul-400: #4299e1;
+
+  /* Cores de Destaque */
+  --dourado: #d69e2e;
+  --dourado-claro: #ecc94b;
+  --verde-sucesso: #38a169;
+  --vermelho-erro: #e53e3e;
+  --amarelo-aviso: #ecc94b;
+
+  /* Neutros */
+  --branco: #ffffff;
+  --cinza-50: #f7fafc;
+  --cinza-100: #edf2f7;
+  --cinza-200: #e2e8f0;
+  --cinza-300: #cbd5e0;
+  --cinza-700: #4a5568;
+  --cinza-800: #2d3748;
+  --cinza-900: #1a202c;
+
+  /* Cores dos Tipos de Commit */
+  --commit-feat: #38a169;
+  --commit-fix: #e53e3e;
+  --commit-docs: #3182ce;
+  --commit-style: #9f7aea;
+  --commit-refactor: #ed8936;
+  --commit-test: #38b2ac;
+  --commit-chore: #718096;
+  --commit-perf: #d69e2e;
+  --commit-ci: #667eea;
+  --commit-build: #ed64a6;
+
+  /* Cores das Branches */
+  --branch-master: #e53e3e;
+  --branch-develop: #ed8936;
+  --branch-feature: #38a169;
+  --branch-release: #d69e2e;
+  --branch-hotfix: #e53e3e;
+
+  /* Background e Foreground */
+  --background: var(--azul-900);
+  --foreground: var(--branco);
+  --card-bg: var(--azul-800);
+  --card-hover: var(--azul-700);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--azul-600);
+  --color-accent: var(--dourado);
+  --color-success: var(--verde-sucesso);
+  --color-error: var(--vermelho-erro);
+  --color-warning: var(--amarelo-aviso);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--azul-800);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--azul-600);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--azul-500);
+}
+
+/* Animações base */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Estilos do Terminal */
+.terminal {
+  background: #0d1117;
+  border-radius: 8px;
+  font-family: var(--font-mono), 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.terminal-header {
+  background: #161b22;
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27ca40; }
+
+.terminal-body {
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.terminal-line {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-prompt {
+  color: #58a6ff;
+}
+
+.terminal-command {
+  color: #c9d1d9;
+}
+
+.terminal-output {
+  color: #8b949e;
+}
+
+/* Código com syntax highlighting básico */
+.code-keyword { color: #ff7b72; }
+.code-string { color: #a5d6ff; }
+.code-comment { color: #8b949e; }
+.code-function { color: #d2a8ff; }
+.code-number { color: #79c0ff; }
+
+/* Cards com hover effect */
+.card-interactive {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.card-interactive:hover {
+  background: var(--card-hover);
+  border-color: var(--azul-600);
+  transform: translateY(-2px);
+}
+
+/* Botões */
+.btn-primary {
+  background: var(--dourado);
+  color: var(--azul-900);
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--dourado-claro);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--azul-700);
+  color: var(--branco);
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--azul-600);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--azul-600);
+}
+
+/* Badge dos tipos de commit */
+.commit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.commit-badge.feat { background: var(--commit-feat); color: white; }
+.commit-badge.fix { background: var(--commit-fix); color: white; }
+.commit-badge.docs { background: var(--commit-docs); color: white; }
+.commit-badge.style { background: var(--commit-style); color: white; }
+.commit-badge.refactor { background: var(--commit-refactor); color: white; }
+.commit-badge.test { background: var(--commit-test); color: white; }
+.commit-badge.chore { background: var(--commit-chore); color: white; }
+.commit-badge.perf { background: var(--commit-perf); color: var(--azul-900); }
+.commit-badge.ci { background: var(--commit-ci); color: white; }
+.commit-badge.build { background: var(--commit-build); color: white; }
+
+/* Branch badges */
+.branch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: var(--font-mono), monospace;
+}
+
+.branch-badge.master { background: var(--branch-master); color: white; }
+.branch-badge.develop { background: var(--branch-develop); color: white; }
+.branch-badge.feature { background: var(--branch-feature); color: white; }
+.branch-badge.release { background: var(--branch-release); color: var(--azul-900); }
+.branch-badge.hotfix { background: var(--branch-hotfix); color: white; }
+
+/* Progresso */
+.progress-bar {
+  height: 8px;
+  background: var(--azul-800);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--dourado), var(--verde-sucesso));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Tooltips */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--cinza-900);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
 }

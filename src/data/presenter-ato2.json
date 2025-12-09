@@ -1,0 +1,105 @@
+{
+  "atoNumero": 2,
+  "title": "Ato 2 - A Descoberta",
+  "tldr": "Mostrar de forma prática como Conventional Commits, Git Flow e SemVer transformam caos em previsibilidade, permitindo controlo total sobre o que entra em produção, quando entra e com que risco.",
+  "keyPoints": [
+    "Conventional Commits transforma mensagens soltas em dados estruturados",
+    "Git Flow cria trilhos previsíveis para features, releases e hotfixes",
+    "SemVer traduz mudanças técnicas em impacto claro para produto e QA",
+    "Commits passam a alimentar automaticamente changelog e versionamento",
+    "CI/CD passa a confiar no tipo de mudança para decidir fluxos de deploy",
+    "O histórico vira uma ferramenta de gestão, não só de código",
+    "Disciplina mínima gera ganho exponencial de previsibilidade"
+  ],
+  "realWorldGains": [
+    {
+      "context": "Squad com deploy semanal",
+      "before": "Commit manual de versão, changelog escrito à mão, erros frequentes",
+      "after": "Versão e changelog automáticos a partir dos commits",
+      "impact": "Redução de 80% no tempo de preparação de release"
+    },
+    {
+      "context": "Produto com QA externo",
+      "before": "QA sem saber se release tinha bugfix ou feature nova",
+      "after": "QA recebe sempre versão MINOR, PATCH ou MAJOR com impacto claro",
+      "impact": "Redução de retrabalho e ciclos de teste"
+    },
+    {
+      "context": "Time com CI/CD avançado",
+      "before": "Todo PR acionava o mesmo pipeline pesado",
+      "after": "Pipelines diferentes para fix, feat e breaking change",
+      "impact": "Redução do custo computacional e tempo de feedback"
+    }
+  ],
+  "storyBeats": [
+    "Pergunte quem já ficou parado por causa de merge infinito.",
+    "Pergunte quem já abriu um PR sem saber se era feature ou hotfix.",
+    "Apresente Conventional Commits como a gramática mínima do time.",
+    "Mostre que uma mensagem boa evita 10 perguntas depois.",
+    "Introduza Git Flow como o mapa oficial do tráfego de código.",
+    "Mostre que ninguém mais precisa adivinhar onde trabalhar.",
+    "Finalize com SemVer como linguagem comum entre dev, QA e produto."
+  ],
+  "demo": [
+    "Escreva um commit ruim: 'ajustes finais' → reescreva como 'fix(auth): corrigir refresh de token expirado'.",
+    "Crie ao vivo a branch 'feature/cupom-desconto' a partir de develop.",
+    "Explique por que essa feature nunca entra direto na master.",
+    "Simule um PR dessa feature para develop.",
+    "Pergunte: isso entra num release MAJOR, MINOR ou PATCH?",
+    "Simule a criação da tag v1.4.0 com base nos commits feat."
+  ],
+  "handsOnSteps": [
+    "1) No repo: mostrar git log curto e escrever um commit ruim ('ajustes finais'); em seguida reescrever como Conventional Commit (ex: fix(auth): corrigir refresh token).",
+    "2) Criar branch feature/cupom-desconto a partir de develop (git checkout develop && git checkout -b feature/cupom-desconto).",
+    "3) Explicar que feature volta para develop via PR — nunca direto em master; abrir PR de exemplo (pode ser mock).",
+    "4) Classificar commits: feat sobe MINOR, fix sobe PATCH, feat! sobe MAJOR; decidir a versão alvo (ex: 1.4.0).",
+    "5) Criar tag de exemplo (git tag v1.4.0) e mencionar que no CI seria criada automaticamente pelo standard-version/semantic-release.",
+    "6) Mostrar rapidamente (se disponível) uma release real no GitHub para reforçar o resultado final do fluxo."
+  ],
+  "technicalFlow": {
+    "conventionalCommits": [
+      "feat → gera versão MINOR",
+      "fix → gera versão PATCH",
+      "feat! ou BREAKING CHANGE → gera versão MAJOR",
+      "docs, chore, style, refactor → não alteram versão"
+    ],
+    "gitFlow": [
+      "feature/* → nasce em develop, morre em develop",
+      "release/* → nasce em develop, termina em master + develop",
+      "hotfix/* → nasce em master, termina em master + develop"
+    ],
+    "semver": [
+      "MAJOR → quebra compatibilidade",
+      "MINOR → adiciona funcionalidade",
+      "PATCH → corrige bug"
+    ]
+  },
+  "automationBridge": [
+    "commitlint valida se commit segue padrão",
+    "husky impede commits inválidos localmente",
+    "standard-version gera versão e changelog",
+    "GitHub Actions publica release e dispara deploy",
+    "Branch Protection garante que nada entra direto na master"
+  ],
+  "poll": {
+    "question": "Quem aqui já teve PR bloqueado por conflito ou falta de padrão?",
+    "options": ["Raramente", "Às vezes", "Praticamente sempre"]
+  },
+  "quiz": {
+    "question": "Qual tipo de commit sobe a versão de 1.4.2 para 1.5.0?",
+    "options": ["fix", "feat", "feat!"],
+    "answerIndex": 1
+  },
+  "timer": {
+    "label": "Tempo sugerido",
+    "durationSeconds": 900
+  },
+  "callouts": [
+    "Use commits reais do repositório da equipa como exemplo.",
+    "Peça ao time para sugerir nomes reais de branches feature/*.",
+    "Mostre pelo menos uma release real no GitHub.",
+    "Reforce que SemVer não é só para dev — é a linguagem de risco para QA e produto.",
+    "Enfatize que Git Flow = previsibilidade, não burocracia."
+  ],
+  "transitionHook": "Agora que já sabemos falar a mesma língua e andar nas mesmas estradas, o que muda na vida real da equipa?"
+}

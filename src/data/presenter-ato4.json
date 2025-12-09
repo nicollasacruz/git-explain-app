@@ -1,0 +1,149 @@
+{
+  "atoNumero": 4,
+  "title": "Ato 4 - O Novo Mundo",
+  "tldr": "Demonstrar como as práticas escalam da equipa piloto para toda a empresa, com métricas reais, automação total e governança leve que sustenta previsibilidade sem travar a entrega.",
+  "keyPoints": [
+    "Escala controlada: múltiplas equipas adotam o mesmo fluxo sem perder autonomia",
+    "Métricas conectam engenharia a resultados de negócio",
+    "Automação elimina trabalho manual de versionamento, changelog e deploy",
+    "Governança leve garante padrão sem criar burocracia",
+    "O fluxo deixa de ser iniciativa local e vira política técnica da empresa"
+  ],
+  "scaleUpScenario": [
+    {
+      "phase": "Piloto",
+      "teams": 1,
+      "focus": "Validar fluxo, ajustar regras, criar primeiros templates",
+      "duration": "1 a 2 sprints"
+    },
+    {
+      "phase": "Expansão",
+      "teams": 3,
+      "focus": "Padronizar commits, branches e releases entre squads",
+      "duration": "2 a 3 meses"
+    },
+    {
+      "phase": "Institucionalização",
+      "teams": "Toda a engenharia",
+      "focus": "Governança leve, automação total e métricas em produção",
+      "duration": "6 meses"
+    }
+  ],
+  "realWorldMetrics": [
+    {
+      "metric": "Lead Time de Deploy",
+      "before": "1 a 3 dias",
+      "after": "30 a 90 minutos",
+      "businessImpact": "Entrega mais rápida para as áreas internas"
+    },
+    {
+      "metric": "MTTR",
+      "before": "Horas",
+      "after": "Minutos",
+      "businessImpact": "Menos impacto operacional durante incidentes"
+    },
+    {
+      "metric": "Taxa de Bugs em Produção",
+      "before": "Alta e imprevisível",
+      "after": "Baixa e controlada",
+      "businessImpact": "Mais confiança de usuários e áreas internas"
+    },
+    {
+      "metric": "Tempo de Onboarding",
+      "before": "2 a 4 semanas",
+      "after": "3 a 5 dias",
+      "businessImpact": "Novos devs produtivos mais rápido dentro da equipa"
+    }
+  ],
+  "storyBeats": [
+    "Recapitular os ganhos técnicos do time piloto.",
+    "Mostrar que outras equipas começaram a replicar o fluxo.",
+    "Apresentar métricas consolidadas após alguns meses.",
+    "Mostrar que o medo inicial de 'burocracia' não se confirmou.",
+    "Introduzir o conceito de governança leve.",
+    "Encerrar com a visão: engenharia previsível passa a ser padrão interno."
+  ],
+  "demo": [
+    "Mostrar um pipeline CI/CD que gera versão, tag e changelog automaticamente.",
+    "Abrir uma release criada automaticamente por GitHub Actions.",
+    "Mostrar padrão único de release notes entre múltiplos repositórios.",
+    "Simular a comunicação automática da release para QA e produto.",
+    "Mostrar que o deploy só acontece após criação de tag e release."
+  ],
+  "handsOnSteps": [
+    "1) GitHub Actions: abrir o workflow de release (yml) e apontar os passos de versão/tag/changelog.",
+    "2) Rodar uma execução de exemplo (ou mostrar a última) no Actions e destacar a criação da tag.",
+    "3) Abrir a página de Releases e mostrar a release gerada (titulo, tag, changelog).",
+    "4) Mostrar o release note padronizado (se tiver multiplos repositórios, comparar rapidamente).",
+    "5) Simular a notificação: copiar o link da release e dizer que vai para QA/produto (Slack/Teams).",
+    "6) Destacar que o deploy em produção é gateado pela existência da tag/release (sem tag, sem deploy)."
+  ],
+  "governanceModel": {
+    "rules": [
+      "Toda mudança entra por Pull Request",
+      "Toda branch segue padrão Git Flow",
+      "Todo commit segue Conventional Commits",
+      "Toda versão tem tag e release",
+      "Toda master está protegida por regras"
+    ],
+    "lightweightControls": [
+      "Templates de PR",
+      "commitlint + husky",
+      "Branch Protection Rules",
+      "Checklists automáticos em CI"
+    ],
+    "ownership": [
+      "Tech Leads definem padrões",
+      "Equipa garante adesão",
+      "DevOps garante automação",
+      "Produto e QA usam SemVer como linguagem de risco"
+    ]
+  },
+  "automationStack": [
+    "commitlint + husky para garantir padrão local",
+    "standard-version para bump automático de versão",
+    "GitHub Actions para criar tags e releases",
+    "Pipelines separados para feature, hotfix e release",
+    "Deploy automático apenas a partir de releases"
+  ],
+  "cultureShift": [
+    "O processo passa a proteger a equipa",
+    "O erro deixa de ser pessoal e passa a ser sistémico",
+    "A previsibilidade passa a ser o padrão",
+    "A confiança entre áreas aumenta",
+    "A engenharia passa a ser vista como madura"
+  ],
+  "nextSteps": [
+    "Definir padrão oficial da empresa",
+    "Criar repositório base com templates",
+    "Treinar novas equipas no fluxo",
+    "Adicionar métricas de engenharia ao dashboard",
+    "Revisar padrão a cada 6 meses"
+  ],
+  "poll": {
+    "question": "Depois de ver este fluxo completo, em quanto tempo acha realista termos toda a engenharia alinhada neste modelo?",
+    "options": ["1 a 2 meses", "3 a 6 meses", "Mais de 6 meses"]
+  },
+  "quiz": {
+    "question": "Qual é o papel principal do SemVer no Novo Mundo?",
+    "options": [
+      "Apenas organizar commits",
+      "Comunicar risco e impacto de forma objetiva",
+      "Acelerar build local"
+    ],
+    "answerIndex": 1
+  },
+  "timer": {
+    "label": "Tempo sugerido",
+    "durationSeconds": 420
+  },
+  "callouts": [
+    "Mostre métricas reais, mesmo que sejam estimadas.",
+    "Enfatize que automação reduz esforço humano.",
+    "Inclua líderes técnicos e QA como patrocinadores do fluxo.",
+    "Reforce que o objetivo não é controle, é previsibilidade.",
+    "Mostre que este modelo prepara a empresa para escalar."
+  ],
+  "finalMessage": "Processo não é burocracia. Processo é o que permite escalar sem perder qualidade.",
+  "closingHook": "A questão não é se vamos adotar este modelo, mas quando consolidá-lo como padrão interno."
+}

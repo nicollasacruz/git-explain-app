@@ -1,0 +1,90 @@
+{
+  "atoNumero": 1,
+  "title": "Ato 1 - O Caos",
+  "tldr": "Demonstrar de forma prática e dolorosamente realista o custo técnico, operacional e humano de viver com histórico de commits caótico: perda de rastreabilidade, falhas em produção, deploys inseguros, incidentes mal resolvidos e times lentos.",
+  "keyPoints": [
+    "Commits genéricos como 'fix', 'ajustes', 'update' eliminam totalmente o contexto técnico da mudança",
+    "Sem padrão não existe rastreabilidade entre código, tarefa, bug, PR e release",
+    "Onboarding fica lento porque o histórico não explica decisões técnicas",
+    "Debug em produção torna-se tentativa e erro, sem linha de investigação clara",
+    "Sem versionamento e tags, rollback vira lotaria",
+    "CI/CD perde confiabilidade quando não é possível identificar o impacto real dos commits",
+    "Em arquiteturas com microserviços, commits vagos tornam impossível rastrear regressões entre serviços",
+    "Auditorias técnicas e compliance falham quando não há histórico confiável de alterações",
+    "Aumenta drasticamente o MTTR (Mean Time To Recovery)",
+    "Aumenta o risco de hotspots de código onde ninguém quer mexer"
+  ],
+  "realWorldCases": [
+    {
+      "context": "E-commerce em Black Friday",
+      "problem": "Deploy de última hora com commits chamados 'fix final' e 'ajuste rápido'",
+      "impact": "Gateway de pagamento parou por 47 minutos",
+      "rootCause": "Alteração em regra de timeout sem documentação",
+      "lesson": "Commits vagos matam incident response"
+    },
+    {
+      "context": "API corporativa com múltiplos integradores",
+      "problem": "Versão em produção alterou contrato da API sem bump de versão",
+      "impact": "Queda simultânea em três clientes externos",
+      "rootCause": "Breaking change escondido num commit 'ajustes endpoint'",
+      "lesson": "Sem SemVer, o cliente vira beta tester involuntário"
+    },
+    {
+      "context": "Time com alta rotação de developers",
+      "problem": "Novo dev demorou 2 semanas para entender fluxo do projeto",
+      "impact": "Retrabalho, bugs reintroduzidos, atrasos de sprint",
+      "rootCause": "Histórico ilegível, sem padrão de commits",
+      "lesson": "Histórico é documentação viva"
+    }
+  ],
+  "storyBeats": [
+    "Pergunte ao time quem já precisou fazer rollback em produção sob pressão.",
+    "Mostre um git log real cheio de 'fix', 'wip', 'teste', 'final agora vai'.",
+    "Peça para identificarem: o que foi entregue? o que quebrou? em qual release?",
+    "Mostre que sem contexto ninguém sabe onde nasceu o bug.",
+    "Conecte com o impacto no suporte interno e pressão das áreas parceiras.",
+    "Reforce que esse caos não é técnico — é processo quebrado.",
+    "Feche com a tese: sem padrão não existe previsibilidade, e sem previsibilidade não existe escala."
+  ],
+  "demo": [
+    "Abra um git log caótico e peça para alguém identificar qual commit gerou um bug específico.",
+    "Pergunte: 'Se eu precisar voltar para a versão de ontem agora, para onde eu volto?'",
+    "Mostre a inexistência de tags e a dificuldade de encontrar a versão correta.",
+    "Simule um incidente: 'Produção parou agora. Qual commit eu reverto?'",
+    "Mostre como pipelines de CI/CD não ajudam quando a base de commits é semânticamente irrelevante."
+  ],
+  "technicalConsequences": [
+    "Impossibilidade de automatizar versionamento",
+    "Impossibilidade de gerar changelog confiável",
+    "Impossibilidade de aplicar release gates por tipo de mudança",
+    "Impossibilidade de detectar breaking changes automaticamente",
+    "Dificuldade em aplicar Git Flow corretamente",
+    "Aumento direto no Lead Time de deploy",
+    "Aumento no número de hotfixes emergenciais"
+  ],
+  "poll": {
+    "question": "Quem aqui já fez deploy sem ter certeza absoluta do que estava a entrar em produção?",
+    "options": ["Nunca", "Algumas vezes", "Demasiadas vezes"]
+  },
+  "quiz": {
+    "question": "Qual é o maior risco técnico de mensagens de commit vagas?",
+    "options": [
+      "Aumentar o tamanho do repositório",
+      "Dificultar o code review apenas",
+      "Impossibilitar rastreio, rollback seguro e gestão de incidentes"
+    ],
+    "answerIndex": 2
+  },
+  "timer": {
+    "label": "Tempo sugerido",
+    "durationSeconds": 420
+  },
+  "callouts": [
+    "Use exemplos reais do próprio repositório sempre que possível.",
+    "Se houver resistência, mostre impacto operacional (SLA interno, retrabalho).",
+    "Relacione com práticas DevOps, SRE e Incident Response.",
+    "Não critique indivíduos — critique o processo.",
+    "Encerre abrindo espaço para a solução no Ato 2: padrão de commits, branches e versionamento."
+  ],
+  "transitionHook": "Se isto é o caos… então como é que um time profissional organiza tudo isso sem travar o desenvolvimento?"
+}
