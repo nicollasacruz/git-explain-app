@@ -213,6 +213,40 @@ export async function avaliarChangelog(
   commits: string[],
   changelogUtilizador: string
 ): Promise<{ pontuacao: number; feedback: string; changelogIdeal: string }> {
+  const buildChangelogIdeal = () => {
+    const sections: Record<string, string[]> = {
+      Features: [],
+      'Bug Fixes': [],
+      Performance: [],
+      Docs: [],
+    }
+
+    const typeMap: Record<string, keyof typeof sections> = {
+      feat: 'Features',
+      fix: 'Bug Fixes',
+      perf: 'Performance',
+      docs: 'Docs',
+    }
+
+    commits.forEach(c => {
+      const tipo = c.split(':')[0]?.split('(')[0] || ''
+      const entry = c.split(':').slice(1).join(':').trim()
+      const section = typeMap[tipo]
+      if (!section) return // omite chore/test para foco no utilizador
+      sections[section].push(`- ${entry}`)
+    })
+
+    const lines: string[] = ['## [1.1.0] - YYYY-MM-DD']
+    const sectionOrder: Array<keyof typeof sections> = ['Features', 'Bug Fixes', 'Performance', 'Docs']
+    sectionOrder.forEach(sec => {
+      if (sections[sec].length === 0) return
+      const emoji = sec === 'Features' ? '✨' : sec === 'Bug Fixes' ? '🐛' : sec === 'Performance' ? '🚀' : '📚'
+      lines.push(``, `### ${emoji} ${sec}`, ...sections[sec])
+    })
+
+    return lines.join('\n')
+  }
+
   const message = await anthropic.messages.create({
     model: CLAUDE_MODEL,
     max_tokens: 800,
@@ -246,8 +280,8 @@ Responde APENAS com JSON válido, sem markdown:
   if (!textBlock) {
     return {
       pontuacao: 0,
-      feedback: 'Não foi possível avaliar.',
-      changelogIdeal: ''
+      feedback: 'Não foi possível avaliar com IA. Usa o exemplo ideal abaixo como referência.',
+      changelogIdeal: buildChangelogIdeal(),
     }
   }
 
@@ -256,8 +290,8 @@ Responde APENAS com JSON válido, sem markdown:
   } catch {
     return {
       pontuacao: 0,
-      feedback: 'Erro ao processar resposta.',
-      changelogIdeal: ''
+      feedback: 'Erro ao processar resposta da IA. Usa o exemplo ideal abaixo como referência.',
+      changelogIdeal: buildChangelogIdeal(),
     }
   }
 }
