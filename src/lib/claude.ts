@@ -94,23 +94,31 @@ export async function analisarMensagemCommit(
     messages: [
       {
         role: 'user',
-        content: `És um code reviewer especializado em Conventional Commits.
+        content: `És um code reviewer especializado em Conventional Commits para uma formação interna.
+
+IMPORTANTE: Esta é uma formação interna de protocolo do setor. Sê FLEXÍVEL e ENCORAJADOR:
+- ACEITA qualquer idioma (português, inglês, espanhol, etc.)
+- A avaliação NÃO precisa ser exata ou rigorosa
+- Foca no conceito geral, não em detalhes
+- Se o utilizador entendeu a ideia básica, dá uma boa pontuação
 
 Commit original (mau exemplo): "${commitOriginal}"
 Contexto: ${contexto}
 Reescrita do utilizador: "${reescritaUtilizador}"
 
 Avalia a reescrita nos seguintes critérios (0-25 pontos cada):
-1. Formato correto (<tipo>[escopo]: <descrição>)
+1. Formato correto (<tipo>[escopo]: <descrição>) - ACEITA qualquer idioma
 2. Tipo apropriado (feat, fix, docs, etc.)
-3. Mensagem clara e no imperativo
+3. Mensagem clara - ACEITA qualquer idioma
 4. Escopo relevante (se aplicável)
+
+SÊ GENEROSO na avaliação. Se o formato básico estiver correto, dá pelo menos 70 pontos.
 
 Responde APENAS com JSON válido, sem markdown:
 {
   "pontuacao": <total 0-100>,
   "breakdown": { "formato": X, "tipo": X, "clareza": X, "escopo": X },
-  "feedback": "<feedback construtivo em 2-3 frases, em português de Portugal>",
+  "feedback": "<feedback construtivo e encorajador em 2-3 frases, em português de Portugal>",
   "sugestao": "<sugestão de melhoria, apenas se pontuacao < 80>"
 }`
       }
@@ -165,10 +173,17 @@ export async function validarScreenshot(
             type: 'text',
             text: `Analisa esta screenshot de um terminal onde o utilizador deveria ter executado os seguintes comandos Git:
 
+IMPORTANTE: Esta é uma formação interna de protocolo do setor. Sê FLEXÍVEL e ENCORAJADOR:
+- ACEITA variações nos comandos (ordem diferente, flags extras, etc.)
+- Se o conceito está correto, considera como feito
+- Foca na intenção, não na execução exata
+
 Ações esperadas:
 ${acoesTexto}
 
 Extrai os comandos visíveis no terminal e verifica se as ações foram completadas corretamente.
+
+SÊ GENEROSO. Se vês comandos Git relacionados às ações, considera como sucesso.
 
 Responde APENAS com JSON válido, sem markdown:
 {
@@ -178,7 +193,7 @@ Responde APENAS com JSON válido, sem markdown:
     ...
   },
   "sucessoGeral": boolean,
-  "feedback": "<feedback sobre o que foi bem/faltou, em português de Portugal>"
+  "feedback": "<feedback encorajador sobre o que foi bem/faltou, em português de Portugal>"
 }`
           }
         ]
@@ -253,7 +268,13 @@ export async function avaliarChangelog(
     messages: [
       {
         role: 'user',
-        content: `És um especialista em Changelogs e Conventional Commits.
+        content: `És um especialista em Changelogs e Conventional Commits para uma formação interna.
+
+IMPORTANTE: Esta é uma formação interna de protocolo do setor. Sê FLEXÍVEL e ENCORAJADOR:
+- ACEITA qualquer idioma (português, inglês, espanhol, etc.)
+- A avaliação NÃO precisa ser exata ou rigorosa
+- Foca no conceito geral: agrupamento por tipo, formatação básica
+- Se o utilizador entendeu a ideia básica, dá uma boa pontuação (70+)
 
 Dado este histórico de commits:
 ${commits.map(c => `- ${c}`).join('\n')}
@@ -262,14 +283,16 @@ O utilizador gerou este changelog:
 ${changelogUtilizador}
 
 Avalia o changelog do utilizador (0-100 pontos) considerando:
-- Categorização correta (Features, Bug Fixes, etc.)
-- Formatação adequada
-- Clareza e organização
+- Categorização correta (Features, Bug Fixes, etc.) - o mais importante
+- Formatação adequada - aceita variações
+- Clareza e organização - ACEITA qualquer idioma
+
+SÊ GENEROSO. Se agrupou corretamente por tipo, dá pelo menos 70 pontos.
 
 Responde APENAS com JSON válido, sem markdown:
 {
   "pontuacao": <0-100>,
-  "feedback": "<feedback construtivo em português de Portugal>",
+  "feedback": "<feedback construtivo e encorajador em português de Portugal>",
   "changelogIdeal": "<como deveria ser o changelog ideal>"
 }`
       }
@@ -311,7 +334,13 @@ export async function avaliarRelease(
     messages: [
       {
         role: 'user',
-        content: `Atua como um release manager.
+        content: `Atua como um release manager para uma formação interna.
+
+IMPORTANTE: Esta é uma formação interna de protocolo do setor. Sê FLEXÍVEL e ENCORAJADOR:
+- ACEITA qualquer idioma (português, inglês, espanhol, etc.)
+- A avaliação NÃO precisa ser exata ou rigorosa
+- Foca nos conceitos: versão correta, sem breaking changes
+- Se o utilizador está próximo, considera correto
 
 Versão atual em produção: v2.0.5
 Commits para a release:
@@ -327,13 +356,15 @@ ${respostas.changelog}
 Avalia as respostas. Nota: há 2 novas features, alguns fixes, nenhum breaking change.
 Próxima versão correta é v2.1.0.
 
+SÊ GENEROSO. Se a versão está próxima de 2.1.0 (como 2.1.x), aceita como correto.
+
 Responde APENAS com JSON válido, sem markdown:
 {
   "versaoCorreta": boolean,
   "tituloOk": boolean,
   "changelogOk": boolean,
   "breakingOk": boolean,
-  "notas": ["string", "string", ...] // notas curtas de feedback
+  "notas": ["string", "string", ...] // notas curtas de feedback encorajador
 }`
       }
     ]

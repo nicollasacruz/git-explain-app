@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft, ArrowRight, Upload, Loader2, Image as ImageIcon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useProgresso } from '@/hooks/useProgresso'
 
 const ACOES_ESPERADAS = [
   {
@@ -23,6 +24,7 @@ const ACOES_ESPERADAS = [
 ]
 
 export default function Exercicio6Page() {
+  const { salvarPontuacao } = useProgresso()
   const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(null)
   const [nomeArquivo, setNomeArquivo] = useState<string>('')
   const [validando, setValidando] = useState(false)
@@ -64,6 +66,12 @@ export default function Exercicio6Page() {
 
       const data = await response.json()
       setResultado(data)
+
+      // Salvar pontuação no progresso se válido
+      if (data.valido) {
+        const pontos = Math.round((data.acoesEncontradas.length / ACOES_ESPERADAS.length) * 100)
+        await salvarPontuacao(6, pontos)
+      }
     } catch (error) {
       setResultado({
         valido: false,

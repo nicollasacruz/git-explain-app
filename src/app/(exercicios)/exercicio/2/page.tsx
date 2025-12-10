@@ -7,8 +7,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { EXEMPLOS_REESCRITA } from '@/types'
 import { ArrowLeft, ArrowRight, Sparkles, Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useProgresso } from '@/hooks/useProgresso'
 
 export default function Exercicio2Page() {
+  const { salvarPontuacao } = useProgresso()
   const [exemploAtual, setExemploAtual] = useState(0)
   const [respostas, setRespostas] = useState<string[]>(
     new Array(EXEMPLOS_REESCRITA.length).fill('')
@@ -57,6 +59,11 @@ export default function Exercicio2Page() {
       setFeedback(data.feedback)
       setPontuacao(typeof data.pontuacao === 'number' ? data.pontuacao : null)
       setResultadoCorreto(typeof data.acertou === 'boolean' ? data.acertou : null)
+
+      // Salvar pontuação no progresso
+      if (typeof data.pontuacao === 'number') {
+        await salvarPontuacao(2, data.pontuacao)
+      }
     } catch (error) {
       // Fallback para manter o fluxo usável mesmo sem backend de correção
       setFeedback(

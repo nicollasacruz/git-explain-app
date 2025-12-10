@@ -8,8 +8,10 @@ import { CommitBadge } from '@/components/ui/badge'
 import { QUESTOES_VERSAO, TipoCommit } from '@/types'
 import { ArrowLeft, ArrowRight, CheckCircle, XCircle, Tag } from 'lucide-react'
 import Link from 'next/link'
+import { useProgresso } from '@/hooks/useProgresso'
 
 export default function Exercicio5Page() {
+  const { salvarPontuacao } = useProgresso()
   const [questaoAtual, setQuestaoAtual] = useState(0)
   const [respostas, setRespostas] = useState<string[]>(
     new Array(QUESTOES_VERSAO.length).fill('')
@@ -40,7 +42,7 @@ export default function Exercicio5Page() {
     }
   }
 
-  const calcularPontuacao = () => {
+  const calcularPontuacao = async () => {
     let acertos = 0
     QUESTOES_VERSAO.forEach((q, index) => {
       if (respostas[index] === q.respostaCorreta) {
@@ -50,6 +52,9 @@ export default function Exercicio5Page() {
     const pontos = Math.round((acertos / QUESTOES_VERSAO.length) * 100)
     setPontuacao(pontos)
     setMostrarResultado(true)
+
+    // Salvar pontuação no progresso
+    await salvarPontuacao(5, pontos)
   }
 
   const reiniciar = () => {

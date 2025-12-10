@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { BranchBadge } from '@/components/ui/badge'
 import { ArrowLeft, ArrowRight, CheckCircle, XCircle, GitBranch } from 'lucide-react'
 import Link from 'next/link'
+import { useProgresso } from '@/hooks/useProgresso'
 
 interface Tarefa {
   id: number
@@ -57,6 +58,7 @@ interface Resposta {
 }
 
 export default function Exercicio3Page() {
+  const { salvarPontuacao } = useProgresso()
   const [respostas, setRespostas] = useState<Resposta[]>(
     TAREFAS.map(() => ({ branchOrigem: '', branchDestino: '' }))
   )
@@ -69,7 +71,7 @@ export default function Exercicio3Page() {
     setRespostas(novasRespostas)
   }
 
-  const validarRespostas = () => {
+  const validarRespostas = async () => {
     let acertos = 0
     TAREFAS.forEach((tarefa, index) => {
       const resposta = respostas[index]
@@ -82,6 +84,9 @@ export default function Exercicio3Page() {
     const pontos = Math.round((acertos / TAREFAS.length) * 100)
     setPontuacao(pontos)
     setMostrarResultado(true)
+
+    // Salvar pontuação no progresso
+    await salvarPontuacao(3, pontos)
   }
 
   const reiniciar = () => {

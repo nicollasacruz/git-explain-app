@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { ArrowLeft, ArrowRight, AlertTriangle, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { useProgresso } from '@/hooks/useProgresso'
 
 interface Problema {
   id: string
@@ -70,6 +71,7 @@ const PROBLEMAS: Problema[] = [
 ]
 
 export default function Exercicio4Page() {
+  const { salvarPontuacao } = useProgresso()
   const [selecionados, setSelecionados] = useState<string[]>([])
   const [mostrarResultado, setMostrarResultado] = useState(false)
   const [pontuacao, setPontuacao] = useState(0)
@@ -82,7 +84,7 @@ export default function Exercicio4Page() {
     }
   }
 
-  const validarRespostas = () => {
+  const validarRespostas = async () => {
     let acertos = 0
     PROBLEMAS.forEach((problema) => {
       const selecionado = selecionados.includes(problema.id)
@@ -96,6 +98,9 @@ export default function Exercicio4Page() {
     const pontos = Math.round((acertos / PROBLEMAS.length) * 100)
     setPontuacao(pontos)
     setMostrarResultado(true)
+
+    // Salvar pontuação no progresso
+    await salvarPontuacao(4, pontos)
   }
 
   const reiniciar = () => {

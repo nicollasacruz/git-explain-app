@@ -9,6 +9,7 @@ import { CommitBadge } from '@/components/ui/badge'
 import { TipoCommit } from '@/types'
 import { ArrowLeft, ArrowRight, CheckCircle, XCircle, Rocket } from 'lucide-react'
 import Link from 'next/link'
+import { useProgresso } from '@/hooks/useProgresso'
 
 const COMMITS_RELEASE: Array<{ tipo: TipoCommit; mensagem: string }> = [
   { tipo: 'feat', mensagem: 'adicionar sistema de notificações push' },
@@ -28,6 +29,7 @@ interface Respostas {
 }
 
 export default function Exercicio7Page() {
+  const { salvarPontuacao } = useProgresso()
   const [respostas, setRespostas] = useState<Respostas>({
     versao: '',
     titulo: '',
@@ -138,6 +140,11 @@ export default function Exercicio7Page() {
         notas: data.notas,
       })
       setValidado(true)
+
+      // Calcular e salvar pontuação
+      const acertos = [data.versaoCorreta, data.tituloOk, data.changelogOk, data.breakingOk].filter(Boolean).length
+      const pontos = Math.round((acertos / 4) * 100)
+      await salvarPontuacao(7, pontos)
       return
     } catch (error) {
       notas.unshift('⚠️ Correção automática ainda não está ativa. Usando validação local.')
@@ -149,6 +156,11 @@ export default function Exercicio7Page() {
         notas,
       })
       setValidado(true)
+
+      // Calcular e salvar pontuação (fallback local)
+      const acertos = [versaoCorretaLocal, tituloOkLocal, changelogOkLocal, breakingOkLocal].filter(Boolean).length
+      const pontos = Math.round((acertos / 4) * 100)
+      await salvarPontuacao(7, pontos)
     }
   }
 

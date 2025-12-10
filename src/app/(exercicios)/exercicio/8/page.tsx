@@ -8,6 +8,7 @@ import { CommitBadge } from '@/components/ui/badge'
 import { TipoCommit } from '@/types'
 import { ArrowLeft, ArrowRight, Sparkles, Loader2, Trophy } from 'lucide-react'
 import Link from 'next/link'
+import { useProgresso } from '@/hooks/useProgresso'
 
 const COMMITS_HISTORICO = [
   'feat(auth): adicionar autenticação com Google OAuth',
@@ -21,6 +22,7 @@ const COMMITS_HISTORICO = [
 ]
 
 export default function Exercicio8Page() {
+  const { salvarPontuacao } = useProgresso()
   const [changelog, setChangelog] = useState('')
   const [avaliando, setAvaliando] = useState(false)
   const [resultado, setResultado] = useState<{
@@ -45,6 +47,11 @@ export default function Exercicio8Page() {
 
       const data = await response.json()
       setResultado(data)
+
+      // Salvar pontuação no progresso
+      if (typeof data.pontuacao === 'number') {
+        await salvarPontuacao(8, data.pontuacao)
+      }
     } catch (error) {
       setResultado({
         pontuacao: 0,
