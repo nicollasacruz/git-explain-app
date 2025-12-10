@@ -106,14 +106,31 @@ export function GuiaAutomacaoModal() {
                 <GitBranch className="w-5 h-5 text-[#d69e2e]" />
                 Como Funciona
               </h3>
-              <div className="bg-[#0d1117] p-6 rounded-lg border border-[#2c5282] font-mono text-sm text-[#e6edf3]">
-                git commit  
-                ↓  
-                commit-msg (valida o padrão)  
-                ↓  
-                Pre-commit (qualquer script opcional)  
-                ↓  
-                Se falhar → commit bloqueado  
+              <div className="bg-[#0d1117] p-6 rounded-lg border border-[#2c5282] font-mono text-sm">
+                <div className="space-y-2 text-[#e6edf3]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#79c0ff]">git commit -m "mensagem"</span>
+                  </div>
+                  <div className="pl-4 text-[#848d97]">↓</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#79c0ff]">pre-commit</span>
+                    <span className="text-[#848d97]">(executa antes - opcional)</span>
+                  </div>
+                  <div className="pl-4 text-[#848d97]">↓</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#79c0ff]">commit-msg</span>
+                    <span className="text-[#848d97]">(valida o padrão)</span>
+                  </div>
+                  <div className="pl-4 text-[#848d97]">↓</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#38a169]">✅ Válido</span>
+                    <span className="text-[#848d97]">→ commit criado</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#e53e3e]">❌ Inválido</span>
+                    <span className="text-[#848d97]">→ commit bloqueado</span>
+                  </div>
+                </div>
               </div>
             </section>
 
