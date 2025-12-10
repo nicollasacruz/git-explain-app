@@ -10,6 +10,8 @@ import { ArrowLeft, Rocket, TrendingUp, Users, Zap, Book, Trophy, Clock, Target,
 import presenterAto4 from '@/data/presenter-ato4.json'
 import { AtoWrapper } from '@/components/shared/AtoWrapper'
 import { BotaoMarcarCompleto } from '@/components/shared/BotaoMarcarCompleto'
+import { GuiaAutomacaoModal } from '@/components/shared/GuiaAutomacaoModal'
+import { GitFlowInitModal } from '@/components/shared/GitFlowInitModal'
 
 type PresenterContent = {
   atoNumero: number
@@ -400,54 +402,22 @@ export default function Ato4Page() {
           <CardHeader>
             <CardTitle className="flex items-center gap-3 text-white">
               <Book className="w-6 h-6 text-[#d69e2e]" />
-              Como Começar na Tua Equipa
+              Como Começar?
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-start gap-4">
+              <Link href="/exercicio/1" className="flex items-start gap-4 p-4 rounded-lg hover:bg-[#2a4365] transition-colors">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#d69e2e] flex items-center justify-center font-bold text-[#1a365d]">
                   1
-                </div>
-                <div>
-                  <h5 className="font-semibold text-white mb-1">Instalar ferramentas</h5>
-                  <code className="text-xs bg-[#1a365d] px-3 py-1 rounded text-[#cbd5e0] block w-fit">
-                    npm install -D @commitlint/cli @commitlint/config-conventional husky
-                  </code>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#d69e2e] flex items-center justify-center font-bold text-[#1a365d]">
-                  2
-                </div>
-                <div>
-                  <h5 className="font-semibold text-white mb-1">Configurar Git Flow</h5>
-                  <code className="text-xs bg-[#1a365d] px-3 py-1 rounded text-[#cbd5e0] block w-fit">
-                    git flow init
-                  </code>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#d69e2e] flex items-center justify-center font-bold text-[#1a365d]">
-                  3
-                </div>
-                <div>
-                  <h5 className="font-semibold text-white mb-1">Workshop com a equipa (30min)</h5>
-                  <p className="text-sm text-[#cbd5e0]">Explica os benefícios e mostra exemplos práticos</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#d69e2e] flex items-center justify-center font-bold text-[#1a365d]">
-                  4
                 </div>
                 <div>
                   <h5 className="font-semibold text-white mb-1">Praticar nos exercícios interativos</h5>
                   <p className="text-sm text-[#cbd5e0]">Completa os 8 exercícios desta aplicação!</p>
                 </div>
-              </div>
+              </Link>
+              <GuiaAutomacaoModal />
+              <GitFlowInitModal />
 
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#38a169] flex items-center justify-center font-bold text-white">
