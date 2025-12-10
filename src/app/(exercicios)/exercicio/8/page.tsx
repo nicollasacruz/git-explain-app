@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { CommitBadge } from '@/components/ui/badge'
 import { TipoCommit } from '@/types'
-import { ArrowLeft, Sparkles, Loader2, Trophy } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Sparkles, Loader2, Trophy } from 'lucide-react'
 import Link from 'next/link'
 
 const COMMITS_HISTORICO = [
