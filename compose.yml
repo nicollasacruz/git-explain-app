@@ -9,6 +9,8 @@ services:
       - VIRTUAL_PORT=3000
     networks:
       - reverse-proxy
+    dns:
+      - 192.168.20.10
 
 networks:
   reverse-proxy:
