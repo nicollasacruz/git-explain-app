@@ -357,46 +357,6 @@ export default function Ato4Page() {
           </CardContent>
         </Card>
 
-        {/* Referências externas para estudo */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3">
-              <Users className="w-6 h-6 text-[#d69e2e]" />
-              Referências externas (benchmark)
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-[#cbd5e0] mb-6">
-              Para benchmarking interno, estas práticas também aparecem em projetos open-source e em empresas conhecidas:
-            </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-[#2a4365] p-4 rounded-lg">
-                <h4 className="font-semibold text-white mb-3">🌟 Projetos Open Source</h4>
-                <ul className="space-y-2 text-sm text-[#cbd5e0]">
-                  <li>✅ Angular (Google)</li>
-                  <li>✅ Electron</li>
-                  <li>✅ Babel</li>
-                  <li>✅ Jest</li>
-                  <li>✅ Karma</li>
-                  <li>✅ React Router</li>
-                </ul>
-              </div>
-
-              <div className="bg-[#2a4365] p-4 rounded-lg">
-                <h4 className="font-semibold text-white mb-3">🏢 Empresas</h4>
-                <ul className="space-y-2 text-sm text-[#cbd5e0]">
-                  <li>✅ Google (projetos internos)</li>
-                  <li>✅ Microsoft (TypeScript, VS Code)</li>
-                  <li>✅ Vercel</li>
-                  <li>✅ GitLab</li>
-                  <li>✅ npm</li>
-                  <li>✅ +100.000 repositórios GitHub</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Próximos Passos */}
         <Card className="bg-gradient-to-br from-[#2c5282] to-[#2a4365] border-[#d69e2e] border-2">
           <CardHeader>
