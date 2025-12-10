@@ -17,9 +17,9 @@ export function GuiaAutomacaoModal() {
           2
         </div>
         <div className="flex-1">
-          <h5 className="font-semibold text-white mb-1">Instalar ferramentas</h5>
+          <h5 className="font-semibold text-white mb-1">Configurar Git Hooks Nativos</h5>
           <code className="text-xs bg-[#1a365d] px-3 py-1 rounded text-[#cbd5e0] block w-fit">
-            npm install -D @commitlint/cli @commitlint/config-conventional husky
+            commit-msg e pre-commit sem dependências externas
           </code>
         </div>
       </div>
@@ -45,9 +45,11 @@ export function GuiaAutomacaoModal() {
             <div>
               <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                 <Shield className="w-7 h-7 text-[#d69e2e]" />
-                Automação de Commits com Husky
+                Automação de Commits com Git Hooks Nativos
               </h2>
-              <p className="text-sm text-[#cbd5e0] mt-1">Guia completo de implementação na equipa</p>
+              <p className="text-sm text-[#cbd5e0] mt-1">
+                Guia completo sem dependências externas
+              </p>
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -60,253 +62,128 @@ export function GuiaAutomacaoModal() {
           {/* Content */}
           <div className="p-6 overflow-y-auto flex-1 space-y-6">
 
-            {/* O Problema */}
+            {/* Problema */}
             <section className="space-y-3">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-[#e53e3e]" />
                 O Problema
               </h3>
               <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#e53e3e]">
-                <p className="text-[#cbd5e0] mb-2"><strong className="text-white">Antes do padrão:</strong></p>
                 <ul className="list-disc list-inside space-y-1 text-sm text-[#cbd5e0]">
-                  <li>Commits como: "ajustes", "fix", "final agora vai"</li>
-                  <li>Histórico pouco confiável</li>
-                  <li>Dificuldade em fazer rollback e gerar changelog</li>
-                  <li>Alto risco de bugs não rastreáveis</li>
+                  <li>Commits inconsistentes: "ajustes", "fix", "agora vai"</li>
+                  <li>Dificuldade em navegar no histórico</li>
+                  <li>Problemas ao gerar changelog ou revert</li>
+                  <li>Risco alto de regressões não rastreáveis</li>
                 </ul>
               </div>
             </section>
 
-            {/* A Solução */}
+            {/* Solução: Git Hooks */}
             <section className="space-y-3">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <Zap className="w-5 h-5 text-[#38a169]" />
-                A Solução: 3 Ferramentas
+                A Solução: Git Hooks Nativos
               </h3>
               <div className="grid md:grid-cols-3 gap-3">
                 <div className="bg-[#2a4365] p-4 rounded-lg border border-[#38a169]">
-                  <h4 className="font-bold text-white mb-2">Husky</h4>
-                  <p className="text-xs text-[#cbd5e0]">Bloqueia commits inválidos</p>
+                  <h4 className="font-bold text-white mb-2">commit-msg</h4>
+                  <p className="text-xs text-[#cbd5e0]">Valida a mensagem de commit</p>
                 </div>
                 <div className="bg-[#2a4365] p-4 rounded-lg border border-[#38a169]">
-                  <h4 className="font-bold text-white mb-2">Commitlint</h4>
-                  <p className="text-xs text-[#cbd5e0]">Valida a mensagem</p>
+                  <h4 className="font-bold text-white mb-2">pre-commit</h4>
+                  <p className="text-xs text-[#cbd5e0]">Corre verificações antes do commit</p>
                 </div>
                 <div className="bg-[#2a4365] p-4 rounded-lg border border-[#38a169]">
-                  <h4 className="font-bold text-white mb-2">Config Conventional</h4>
-                  <p className="text-xs text-[#cbd5e0]">Define as regras</p>
+                  <h4 className="font-bold text-white mb-2">pre-receive (servidor)</h4>
+                  <p className="text-xs text-[#cbd5e0]">Validação centralizada</p>
                 </div>
-              </div>
-              <div className="bg-[#2a4365] p-3 rounded-lg border-l-4 border-[#38a169]">
-                <p className="text-sm text-[#cbd5e0]">
-                  💡 <strong className="text-white">Resultado:</strong> Só entra no Git quem escrever commits corretamente.
-                </p>
               </div>
             </section>
 
-            {/* O Fluxo */}
+            {/* Fluxo */}
             <section className="space-y-3">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 <GitBranch className="w-5 h-5 text-[#d69e2e]" />
                 Como Funciona
               </h3>
-              <div className="bg-[#0d1117] p-6 rounded-lg border border-[#2c5282] font-mono text-sm">
-                <div className="space-y-2 text-[#e6edf3]">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#79c0ff]">git commit</span>
-                  </div>
-                  <div className="pl-4 text-[#848d97]">↓</div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#79c0ff]">husky</span>
-                    <span className="text-[#848d97]">(intercepta)</span>
-                  </div>
-                  <div className="pl-4 text-[#848d97]">↓</div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#79c0ff]">commitlint</span>
-                    <span className="text-[#848d97]">(valida)</span>
-                  </div>
-                  <div className="pl-4 text-[#848d97]">↓</div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#38a169]">✅ Passa</span>
-                    <span className="text-[#848d97]">→ commit entra</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#e53e3e]">❌ Falha</span>
-                    <span className="text-[#848d97]">→ commit bloqueado</span>
-                  </div>
-                </div>
+              <div className="bg-[#0d1117] p-6 rounded-lg border border-[#2c5282] font-mono text-sm text-[#e6edf3]">
+                git commit  
+                ↓  
+                commit-msg (valida o padrão)  
+                ↓  
+                Pre-commit (qualquer script opcional)  
+                ↓  
+                Se falhar → commit bloqueado  
               </div>
             </section>
 
             {/* Instalação */}
             <section className="space-y-3">
-              <h3 className="text-xl font-bold text-white">Passo 1: Instalação</h3>
-              <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
-                <code className="text-[#79c0ff] text-sm">
-                  npm install -G @commitlint/cli @commitlint/config-conventional husky
+              <h3 className="text-xl font-bold text-white">Passo 1: Criar o Hook commit-msg</h3>
+              
+              <p className="text-sm text-[#cbd5e0]">Criar o ficheiro:</p>
+              <code className="bg-[#1a365d] px-2 py-1 rounded text-[#cbd5e0] text-sm block w-fit">
+                .git/hooks/commit-msg
+              </code>
+
+              <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282] mt-2">
+                <pre className="text-[#79c0ff] text-xs">
+{`#!/bin/sh
+commit_msg=$(cat "$1")
+pattern="^(feat|fix|docs|refactor|test|chore|style|perf|ci|build)(\\(.+\\))?: .+"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo "❌ Commit inválido!"
+  echo "Formato correto: tipo(escopo): descrição"
+  exit 1
+fi`}
+                </pre>
+              </div>
+
+              <p className="text-xs text-[#718096] mt-2">Dar permissão:</p>
+              <div className="bg-[#0d1117] p-3 rounded-lg border border-[#2c5282]">
+                <code className="text-[#79c0ff] text-sm">chmod +x .git/hooks/commit-msg</code>
+              </div>
+            </section>
+
+            {/* Teste */}
+            <section className="space-y-3">
+              <h3 className="text-xl font-bold text-white">Passo 2: Testar</h3>
+
+              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#d69e2e]">
+                <p className="text-sm text-[#cbd5e0] mb-2">Teste com mensagem inválida:</p>
+                <code className="bg-[#0d1117] px-3 py-1 rounded text-[#79c0ff] block w-fit">
+                  git commit -m "ajustes"
                 </code>
+                <p className="text-xs text-[#e53e3e] mt-2">❌ Deve falhar</p>
               </div>
-              <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
-                <code className="text-[#79c0ff] text-sm">npx husky init</code>
-              </div>
-              <p className="text-xs text-[#848d97]">Isto cria a pasta <code className="bg-[#1a365d] px-2 py-0.5 rounded">.husky/</code> e adiciona o script prepare ao package.json</p>
-            </section>
 
-            {/* Configuração */}
-            <section className="space-y-3">
-              <h3 className="text-xl font-bold text-white">Passo 2: Configuração</h3>
-              <div>
-                <p className="text-sm text-[#cbd5e0] mb-2">Criar ficheiro <code className="bg-[#1a365d] px-2 py-0.5 rounded">.commitlintrc.json</code>:</p>
-                <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
-                  <pre className="text-[#79c0ff] text-xs">
-{`{
-  "extends": ["@commitlint/config-conventional"]
-}`}
-                  </pre>
-                </div>
-              </div>
-              <div>
-                <p className="text-sm text-[#cbd5e0] mb-2">Criar ficheiro <code className="bg-[#1a365d] px-2 py-0.5 rounded">.husky/commit-msg</code>:</p>
-                <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
-                  <pre className="text-[#79c0ff] text-xs">
-{`npx --no -- commitlint --edit "$1"`}
-                  </pre>
-                </div>
-              </div>
-            </section>
-
-            {/* Testar */}
-            <section className="space-y-3">
-              <h3 className="text-xl font-bold text-white">Passo 3: Testar</h3>
-              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#d69e2e]">
-                <p className="text-sm text-[#cbd5e0] mb-3">
-                  <strong className="text-white">Importante:</strong> Remover o pre-commit padrão antes de testar
-                </p>
-                <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282] mb-3">
-                  <code className="text-[#79c0ff] text-sm">rm .husky/pre-commit</code>
-                </div>
-                <p className="text-xs text-[#718096] mb-3">
-                  O <code className="bg-[#1a365d] px-2 py-0.5 rounded">npx husky init</code> cria um pre-commit de exemplo que pode interferir. Remove-o antes de testar.
-                </p>
-                <p className="text-sm text-[#cbd5e0] mb-2">Agora testa o commit:</p>
-                <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
-                  <code className="text-[#79c0ff] text-sm">git commit -m "teste"</code>
-                </div>
-                <p className="text-xs text-[#848d97] mt-2">
-                  ❌ Deve falhar! Se falhar, está a funcionar corretamente.
-                </p>
-              </div>
-            </section>
-
-            {/* Formato do Commit */}
-            <section className="space-y-3">
-              <h3 className="text-xl font-bold text-white">Formato Obrigatório</h3>
-              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#d69e2e]">
-                <code className="text-[#d69e2e] font-bold">tipo(escopo): descrição clara</code>
-              </div>
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="bg-[#2a4365] p-3 rounded-lg">
-                  <p className="text-xs text-[#718096] mb-2">✅ Exemplos corretos:</p>
-                  <div className="space-y-1 text-xs font-mono text-[#cbd5e0]">
-                    <div>feat(cart): adicionar cupão de desconto</div>
-                    <div>fix(auth): corrigir token expirado</div>
-                    <div>docs(api): atualizar endpoints</div>
-                  </div>
-                </div>
-                <div className="bg-[#2a4365] p-3 rounded-lg">
-                  <p className="text-xs text-[#718096] mb-2">❌ Exemplos errados:</p>
-                  <div className="space-y-1 text-xs font-mono text-[#cbd5e0]">
-                    <div>ajustes</div>
-                    <div>fix</div>
-                    <div>final agora vai</div>
-                  </div>
-                </div>
+              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#38a169]">
+                <p className="text-sm text-[#cbd5e0] mb-2">Teste com mensagem válida:</p>
+                <code className="bg-[#0d1117] px-3 py-1 rounded text-[#79c0ff] block w-fit">
+                  git commit -m "feat(api): criar endpoint de utilizadores"
+                </code>
+                <p className="text-xs text-[#38a169] mt-2">✅ Deve passar</p>
               </div>
             </section>
 
             {/* Tipos */}
             <section className="space-y-3">
-              <h3 className="text-xl font-bold text-white">Tipos Principais</h3>
+              <h3 className="text-xl font-bold text-white">Tipos Permitidos</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
-                <div className="bg-[#2a4365] p-2 rounded border-l-2 border-[#38a169]">
-                  <strong className="text-white">feat</strong>
-                  <p className="text-[#cbd5e0]">Nova funcionalidade</p>
-                </div>
-                <div className="bg-[#2a4365] p-2 rounded border-l-2 border-[#e53e3e]">
-                  <strong className="text-white">fix</strong>
-                  <p className="text-[#cbd5e0]">Correção de bug</p>
-                </div>
-                <div className="bg-[#2a4365] p-2 rounded border-l-2 border-[#3182ce]">
-                  <strong className="text-white">docs</strong>
-                  <p className="text-[#cbd5e0]">Documentação</p>
-                </div>
-                <div className="bg-[#2a4365] p-2 rounded border-l-2 border-[#ed8936]">
-                  <strong className="text-white">refactor</strong>
-                  <p className="text-[#cbd5e0]">Refatoração</p>
-                </div>
-                <div className="bg-[#2a4365] p-2 rounded border-l-2 border-[#38b2ac]">
-                  <strong className="text-white">test</strong>
-                  <p className="text-[#cbd5e0]">Testes</p>
-                </div>
-                <div className="bg-[#2a4365] p-2 rounded border-l-2 border-[#718096]">
-                  <strong className="text-white">chore</strong>
-                  <p className="text-[#cbd5e0]">Manutenção</p>
-                </div>
-              </div>
-            </section>
-
-            {/* Backend C# */}
-            <section className="space-y-3">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-[#d69e2e]" />
-                Repositório Backend C# / .NET
-              </h3>
-              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#d69e2e]">
-                <p className="text-sm text-[#cbd5e0] mb-3">
-                  <strong className="text-white">Atenção:</strong> Em projetos .NET/C# sem Node.js, precisas de uma alternativa ao Husky.
-                </p>
-
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-white font-semibold mb-2">Opção 1: Husky.NET</p>
-                    <div className="bg-[#0d1117] p-3 rounded-lg border border-[#2c5282] mb-2">
-                      <code className="text-[#79c0ff] text-xs">dotnet tool install Husky</code>
-                    </div>
-                    <div className="bg-[#0d1117] p-3 rounded-lg border border-[#2c5282]">
-                      <code className="text-[#79c0ff] text-xs">dotnet husky install</code>
-                    </div>
-                    <p className="text-xs text-[#718096] mt-2">
-                      📦 Requer: <a href="https://alirezanet.github.io/Husky.Net/" target="_blank" rel="noopener noreferrer" className="text-[#d69e2e] underline">Husky.NET</a>
-                    </p>
+                {[
+                  ["feat", "Nova funcionalidade", "#38a169"],
+                  ["fix", "Correção de bug", "#e53e3e"],
+                  ["docs", "Documentação", "#3182ce"],
+                  ["refactor", "Refatoração", "#ed8936"],
+                  ["test", "Testes", "#38b2ac"],
+                  ["chore", "Manutenção", "#718096"],
+                ].map(([type, desc, color]) => (
+                  <div key={type} className={`bg-[#2a4365] p-2 rounded border-l-2`} style={{ borderColor: color }}>
+                    <strong className="text-white">{type}</strong>
+                    <p className="text-[#cbd5e0]">{desc}</p>
                   </div>
-
-                  <div>
-                    <p className="text-sm text-white font-semibold mb-2">Opção 2: Git Hooks Nativos</p>
-                    <p className="text-xs text-[#cbd5e0] mb-2">Criar manualmente <code className="bg-[#1a365d] px-2 py-0.5 rounded">.git/hooks/commit-msg</code>:</p>
-                    <div className="bg-[#0d1117] p-3 rounded-lg border border-[#2c5282]">
-                      <pre className="text-[#79c0ff] text-xs">
-{`#!/bin/sh
-commit_msg=$(cat "$1")
-pattern="^(feat|fix|docs|style|refactor|perf|test|chore)(\\(.+\\))?: .+"
-
-if ! echo "$commit_msg" | grep -qE "$pattern"; then
-  echo "❌ Commit inválido!"
-  echo "Use: tipo(escopo): descrição"
-  exit 1
-fi`}
-                      </pre>
-                    </div>
-                    <p className="text-xs text-[#718096] mt-2">⚠️ Nota: Cada dev precisa configurar localmente</p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-white font-semibold mb-2">Opção 3: Pre-receive Hook no Servidor Git</p>
-                    <p className="text-xs text-[#cbd5e0]">
-                      Configurar validação no servidor (Azure DevOps, GitLab, GitHub) para bloquear pushes com commits inválidos.
-                    </p>
-                    <p className="text-xs text-[#718096] mt-1">✅ Vantagem: Centralizado, não depende de configuração local</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </section>
 
@@ -316,33 +193,23 @@ fi`}
                 <Check className="w-5 h-5 text-[#38a169]" />
                 Benefícios Diretos
               </h3>
+
               <div className="grid md:grid-cols-2 gap-2">
                 {[
-                  'Histórico limpo e rastreável',
-                  'Changelog automático',
-                  'SemVer confiável',
-                  'Menos bugs em produção',
-                  'Rollback seguro',
-                  'Onboarding mais rápido',
-                  'Confiança entre Dev, QA e Produto',
-                  'Padrão internacional'
-                ].map((benefit, i) => (
+                  'Histórico limpo e estruturado',
+                  'Rollback mais seguro',
+                  'Padronização entre devs',
+                  'Sem dependências externas',
+                  'Funciona em qualquer linguagem',
+                  'Setup rápido e simples',
+                  'Menos probabilidade de erros',
+                  'Commit sempre legível'
+                ].map((b, i) => (
                   <div key={i} className="flex items-center gap-2 text-sm text-[#cbd5e0]">
-                    <Check className="w-4 h-4 text-[#38a169] flex-shrink-0" />
-                    {benefit}
+                    <Check className="w-4 h-4 text-[#38a169]" /> {b}
                   </div>
                 ))}
               </div>
-            </section>
-
-            {/* Mensagem Final */}
-            <section className="bg-gradient-to-r from-[#2a4365] to-[#1a365d] p-6 rounded-lg border-2 border-[#d69e2e] text-center">
-              <p className="text-lg text-white font-semibold mb-2">
-                Processo não é burocracia
-              </p>
-              <p className="text-[#cbd5e0]">
-                Processo é o que permite escalar com segurança
-              </p>
             </section>
 
           </div>
