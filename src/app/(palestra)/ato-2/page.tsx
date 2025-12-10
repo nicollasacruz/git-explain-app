@@ -274,7 +274,7 @@ export default function Ato2Page() {
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-2xl">{tipo.emoji}</span>
-                      <CommitBadge tipo={tipo.tipo as any} />
+                      <CommitBadge tipo={tipo.tipo} />
                     </div>
                     <p className="text-sm text-white font-semibold mb-1">{tipo.nome}</p>
                     <p className="text-xs text-[#cbd5e0] mb-2">{tipo.descricao}</p>

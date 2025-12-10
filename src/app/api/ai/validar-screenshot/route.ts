@@ -22,7 +22,22 @@ export async function POST(req: NextRequest) {
 
     const resultado = await validarScreenshot(imagemBase64, acoesEsperadas)
 
-    return NextResponse.json(resultado)
+    // Adaptar resposta para o formato esperado pelo frontend
+    const acoesEncontradas: string[] = []
+    Object.entries(resultado.acoesCompletadas || {}).forEach(([id, dados]) => {
+      if (dados.feito) {
+        const acao = acoesEsperadas.find(a => a.id === id)
+        if (acao) {
+          acoesEncontradas.push(acao.descricao)
+        }
+      }
+    })
+
+    return NextResponse.json({
+      valido: resultado.sucessoGeral,
+      feedback: resultado.feedback,
+      acoesEncontradas,
+    })
   } catch (error) {
     console.error('Erro ao validar screenshot:', error)
     return NextResponse.json(

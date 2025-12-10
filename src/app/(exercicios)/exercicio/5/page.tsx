@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { CommitBadge } from '@/components/ui/badge'
-import { QUESTOES_VERSAO } from '@/types'
+import { QUESTOES_VERSAO, TipoCommit } from '@/types'
 import { ArrowLeft, ArrowRight, CheckCircle, XCircle, Tag } from 'lucide-react'
 import Link from 'next/link'
 
@@ -115,9 +115,10 @@ export default function Exercicio5Page() {
                             {q.versaoAtual} + {q.commits.length} commits
                           </p>
                           <div className="flex flex-wrap gap-2 mb-2">
-                            {q.commits.map((commit, i) => (
-                              <CommitBadge key={i} tipo={commit.tipo as any} />
-                            ))}
+                            {q.commits.map((commit, i) => {
+                              const tipo = (commit.split(':')[0]?.split('(')[0]?.split('!')[0] || 'feat') as TipoCommit
+                              return <CommitBadge key={i} tipo={tipo} />
+                            })}
                           </div>
                           <div className="flex items-center gap-3 text-sm mt-3">
                             <span className="text-[#cbd5e0]">Resposta correta:</span>
@@ -219,20 +220,26 @@ export default function Exercicio5Page() {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              {questao.commits.map((commit, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-3 bg-[#2a4365] rounded-lg"
-                >
-                  <CommitBadge tipo={commit.tipo as any} />
-                  <span className="text-[#cbd5e0] text-sm">{commit.mensagem}</span>
-                  {commit.breaking && (
-                    <span className="ml-auto px-2 py-1 bg-[#e53e3e] text-white text-xs rounded font-bold">
-                      BREAKING
-                    </span>
-                  )}
-                </div>
-              ))}
+              {questao.commits.map((commit, index) => {
+                // Extrai o tipo do commit da string (ex: "feat(api): texto" -> "feat")
+                const tipo = commit.split('(')[0].split(':')[0].split('!')[0] as TipoCommit
+                const hasBreaking = commit.includes('!')
+
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-3 bg-[#2a4365] rounded-lg"
+                  >
+                    <CommitBadge tipo={tipo} />
+                    <span className="text-[#cbd5e0] text-sm font-mono">{commit}</span>
+                    {hasBreaking && (
+                      <span className="ml-auto px-2 py-1 bg-[#e53e3e] text-white text-xs rounded font-bold">
+                        BREAKING
+                      </span>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </CardContent>
         </Card>

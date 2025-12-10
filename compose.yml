@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: gitflow-app
+    build: .
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - VIRTUAL_HOST=gitflow.groupmecwide.lan
+      - VIRTUAL_PORT=3000
+    networks:
+      - reverse-proxy
+
+networks:
+  reverse-proxy:
+    external: true

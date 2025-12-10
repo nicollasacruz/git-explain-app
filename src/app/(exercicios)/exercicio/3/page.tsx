@@ -159,7 +159,7 @@ export default function Exercicio3Page() {
                           <div className="space-y-2 text-sm">
                             <div className="flex items-center gap-3">
                               <span className="text-[#cbd5e0] w-24">Origem:</span>
-                              <BranchBadge tipo={tarefa.branchOrigem as any} />
+                              <BranchBadge tipo={tarefa.branchOrigem as 'master' | 'develop'} />
                               {!origemCorreta && (
                                 <span className="text-[#e53e3e] text-xs">
                                   (escolheste: {resposta.branchOrigem || 'nenhuma'})
@@ -284,7 +284,7 @@ export default function Exercicio3Page() {
                         De onde deve criar a branch?
                       </label>
                       <div className="flex gap-2">
-                        {['master', 'develop'].map((branch) => (
+                        {(['master', 'develop'] as const).map((branch) => (
                           <button
                             key={branch}
                             onClick={() => handleResposta(index, 'branchOrigem', branch)}
@@ -294,7 +294,7 @@ export default function Exercicio3Page() {
                                 : 'border-[#2c5282] bg-[#2a4365] hover:border-[#2b6cb0]'
                             }`}
                           >
-                            <BranchBadge tipo={branch as any} />
+                            <BranchBadge tipo={branch} />
                           </button>
                         ))}
                       </div>

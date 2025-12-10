@@ -35,7 +35,11 @@ export async function POST(req: NextRequest) {
         contexto || ''
       )
 
-      return NextResponse.json(resultado)
+      // Adaptar resposta para incluir o campo 'acertou' esperado pelo frontend
+      return NextResponse.json({
+        ...resultado,
+        acertou: resultado.pontuacao >= 70, // Considera aprovado se >= 70%
+      })
     } catch (err) {
       console.error('[Claude] Falha ao analisar mensagem', err)
       const acertou = isMensagemValida(reescritaUtilizador)

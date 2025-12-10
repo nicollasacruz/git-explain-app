@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 import { CommitBadge } from '@/components/ui/badge'
+import { TipoCommit } from '@/types'
 import { ArrowLeft, Sparkles, Loader2, Trophy } from 'lucide-react'
 import Link from 'next/link'
 
@@ -109,13 +110,13 @@ export default function Exercicio8Page() {
           <CardContent>
             <div className="space-y-2">
               {COMMITS_HISTORICO.map((commit, index) => {
-                const tipo = commit.split('(')[0].split(':')[0]
+                const tipo = commit.split('(')[0].split(':')[0] as TipoCommit
                 return (
                   <div
                     key={index}
                     className="flex items-center gap-3 p-3 bg-[#2a4365] rounded-lg"
                   >
-                    <CommitBadge tipo={tipo as any} />
+                    <CommitBadge tipo={tipo} />
                     <span className="text-[#cbd5e0] text-sm font-mono">{commit}</span>
                   </div>
                 )

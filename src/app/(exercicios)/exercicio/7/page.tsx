@@ -6,10 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { CommitBadge } from '@/components/ui/badge'
+import { TipoCommit } from '@/types'
 import { ArrowLeft, ArrowRight, CheckCircle, XCircle, Rocket } from 'lucide-react'
 import Link from 'next/link'
 
-const COMMITS_RELEASE = [
+const COMMITS_RELEASE: Array<{ tipo: TipoCommit; mensagem: string }> = [
   { tipo: 'feat', mensagem: 'adicionar sistema de notificações push' },
   { tipo: 'feat', mensagem: 'implementar modo offline' },
   { tipo: 'fix', mensagem: 'corrigir crash ao abrir perfil' },
@@ -204,7 +205,7 @@ export default function Exercicio7Page() {
                   key={index}
                   className="flex items-center gap-3 p-3 bg-[#2a4365] rounded-lg"
                 >
-                  <CommitBadge tipo={commit.tipo as any} />
+                  <CommitBadge tipo={commit.tipo} />
                   <span className="text-[#cbd5e0] text-sm">{commit.mensagem}</span>
                 </div>
               ))}

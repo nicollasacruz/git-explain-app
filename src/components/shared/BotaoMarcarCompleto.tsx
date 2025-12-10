@@ -13,7 +13,7 @@ export function BotaoMarcarCompleto({ atoNumero }: BotaoMarcarCompletoProps) {
   const { progress, refresh } = useProgresso()
   const [loading, setLoading] = useState(false)
 
-  const isCompleto = progress?.atoAtual && progress.atoAtual >= atoNumero
+  const isCompleto = Boolean(progress?.atoAtual && progress.atoAtual >= atoNumero)
 
   const marcarCompleto = async () => {
     setLoading(true)
@@ -38,7 +38,7 @@ export function BotaoMarcarCompleto({ atoNumero }: BotaoMarcarCompletoProps) {
     <Button
       onClick={marcarCompleto}
       disabled={loading || isCompleto}
-      variant={isCompleto ? 'outline' : 'default'}
+      variant={isCompleto ? 'secondary' : 'primary'}
       size="lg"
       className="gap-2"
     >

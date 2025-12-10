@@ -4,6 +4,7 @@ declare module 'next-auth' {
   interface Session {
     user: {
       id: string
+      role?: string
     } & DefaultSession['user']
   }
 }
@@ -435,3 +436,6 @@ export const QUIZ_VERSAO: VersaoQuestion[] = [
     explicacao: 'maior tipo é feat = MINOR'
   }
 ]
+
+// Alias usado nos exercícios (mantém compatibilidade)
+export const QUESTOES_VERSAO = QUIZ_VERSAO
