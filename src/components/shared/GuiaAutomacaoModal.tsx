@@ -145,15 +145,15 @@ export function GuiaAutomacaoModal() {
 
               <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282] mt-2">
                 <pre className="text-[#79c0ff] text-xs">
-{`#!/bin/sh
-commit_msg=$(cat "$1")
-pattern="^(feat|fix|docs|refactor|test|chore|style|perf|ci|build)(\\(.+\\))?: .+"
+                  {`#!/bin/sh
+                  commit_msg=$(cat "$1")
+                  pattern="^(feat|fix|docs|refactor|test|chore|style|perf|ci|build)(\\(.+\\))?: .+"
 
-if ! echo "$commit_msg" | grep -qE "$pattern"; then
-  echo "❌ Commit inválido!"
-  echo "Formato correto: tipo(escopo): descrição"
-  exit 1
-fi`}
+                  if ! echo "$commit_msg" | grep -qE "$pattern"; then
+                    echo "❌ Commit inválido!"
+                    echo "Formato correto: tipo(escopo): descrição"
+                    exit 1
+                  fi`}
                 </pre>
               </div>
 
