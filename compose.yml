@@ -4,7 +4,7 @@ services:
     build: .
     restart: always
     ports: 
-      - "90990:3000"
+      - "9997:3000"
     environment:
       - NODE_ENV=production
       - VIRTUAL_HOST=gitflow.groupmecwide.lan
