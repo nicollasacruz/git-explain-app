@@ -143,7 +143,7 @@ export function GuiaAutomacaoModal() {
               <h3 className="text-xl font-bold text-white">Passo 1: Instalação</h3>
               <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
                 <code className="text-[#79c0ff] text-sm">
-                  npm install -D @commitlint/cli @commitlint/config-conventional husky
+                  npm install -G @commitlint/cli @commitlint/config-conventional husky
                 </code>
               </div>
               <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
@@ -172,6 +172,29 @@ export function GuiaAutomacaoModal() {
 {`npx --no -- commitlint --edit "$1"`}
                   </pre>
                 </div>
+              </div>
+            </section>
+
+            {/* Testar */}
+            <section className="space-y-3">
+              <h3 className="text-xl font-bold text-white">Passo 3: Testar</h3>
+              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#d69e2e]">
+                <p className="text-sm text-[#cbd5e0] mb-3">
+                  <strong className="text-white">Importante:</strong> Remover o pre-commit padrão antes de testar
+                </p>
+                <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282] mb-3">
+                  <code className="text-[#79c0ff] text-sm">rm .husky/pre-commit</code>
+                </div>
+                <p className="text-xs text-[#718096] mb-3">
+                  O <code className="bg-[#1a365d] px-2 py-0.5 rounded">npx husky init</code> cria um pre-commit de exemplo que pode interferir. Remove-o antes de testar.
+                </p>
+                <p className="text-sm text-[#cbd5e0] mb-2">Agora testa o commit:</p>
+                <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                  <code className="text-[#79c0ff] text-sm">git commit -m "teste"</code>
+                </div>
+                <p className="text-xs text-[#848d97] mt-2">
+                  ❌ Deve falhar! Se falhar, está a funcionar corretamente.
+                </p>
               </div>
             </section>
 
@@ -228,6 +251,61 @@ export function GuiaAutomacaoModal() {
                 <div className="bg-[#2a4365] p-2 rounded border-l-2 border-[#718096]">
                   <strong className="text-white">chore</strong>
                   <p className="text-[#cbd5e0]">Manutenção</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Backend C# */}
+            <section className="space-y-3">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-[#d69e2e]" />
+                Repositório Backend C# / .NET
+              </h3>
+              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#d69e2e]">
+                <p className="text-sm text-[#cbd5e0] mb-3">
+                  <strong className="text-white">Atenção:</strong> Em projetos .NET/C# sem Node.js, precisas de uma alternativa ao Husky.
+                </p>
+
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm text-white font-semibold mb-2">Opção 1: Husky.NET</p>
+                    <div className="bg-[#0d1117] p-3 rounded-lg border border-[#2c5282] mb-2">
+                      <code className="text-[#79c0ff] text-xs">dotnet tool install Husky</code>
+                    </div>
+                    <div className="bg-[#0d1117] p-3 rounded-lg border border-[#2c5282]">
+                      <code className="text-[#79c0ff] text-xs">dotnet husky install</code>
+                    </div>
+                    <p className="text-xs text-[#718096] mt-2">
+                      📦 Requer: <a href="https://alirezanet.github.io/Husky.Net/" target="_blank" rel="noopener noreferrer" className="text-[#d69e2e] underline">Husky.NET</a>
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-white font-semibold mb-2">Opção 2: Git Hooks Nativos</p>
+                    <p className="text-xs text-[#cbd5e0] mb-2">Criar manualmente <code className="bg-[#1a365d] px-2 py-0.5 rounded">.git/hooks/commit-msg</code>:</p>
+                    <div className="bg-[#0d1117] p-3 rounded-lg border border-[#2c5282]">
+                      <pre className="text-[#79c0ff] text-xs">
+{`#!/bin/sh
+commit_msg=$(cat "$1")
+pattern="^(feat|fix|docs|style|refactor|perf|test|chore)(\\(.+\\))?: .+"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo "❌ Commit inválido!"
+  echo "Use: tipo(escopo): descrição"
+  exit 1
+fi`}
+                      </pre>
+                    </div>
+                    <p className="text-xs text-[#718096] mt-2">⚠️ Nota: Cada dev precisa configurar localmente</p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-white font-semibold mb-2">Opção 3: Pre-receive Hook no Servidor Git</p>
+                    <p className="text-xs text-[#cbd5e0]">
+                      Configurar validação no servidor (Azure DevOps, GitLab, GitHub) para bloquear pushes com commits inválidos.
+                    </p>
+                    <p className="text-xs text-[#718096] mt-1">✅ Vantagem: Centralizado, não depende de configuração local</p>
+                  </div>
                 </div>
               </div>
             </section>
