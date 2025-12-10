@@ -359,6 +359,108 @@ export default function Ato1Page() {
               </p>
             </CardContent>
           </Card>
+
+          {/* Recapitulação de Comandos Git Básicos */}
+          <Card className="border-[#2c5282]">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3">
+                <GitBranch className="w-6 h-6 text-[#38a169]" />
+                Recapitulação: Comandos Git Essenciais
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <p className="text-[#cbd5e0]">
+                Antes de mergulharmos nas soluções, vamos relembrar os comandos Git básicos que vais precisar nos próximos atos:
+              </p>
+
+              {/* Git Básico - Commits */}
+              <div className="space-y-3">
+                <h4 className="font-semibold text-white text-lg">📝 Criar Commits</h4>
+                <div className="space-y-2">
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git add .</code>
+                    <p className="text-sm text-[#848d97] mt-1">Adiciona todos os ficheiros alterados ao staging area</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git commit -m "mensagem"</code>
+                    <p className="text-sm text-[#848d97] mt-1">Cria um commit com a mensagem especificada</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git status</code>
+                    <p className="text-sm text-[#848d97] mt-1">Mostra o estado atual do repositório (ficheiros alterados, staging, etc.)</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Branches */}
+              <div className="space-y-3">
+                <h4 className="font-semibold text-white text-lg">🌿 Trabalhar com Branches</h4>
+                <div className="space-y-2">
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git branch</code>
+                    <p className="text-sm text-[#848d97] mt-1">Lista todas as branches locais</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git checkout -b nome-da-branch</code>
+                    <p className="text-sm text-[#848d97] mt-1">Cria uma nova branch e muda para ela</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git checkout nome-da-branch</code>
+                    <p className="text-sm text-[#848d97] mt-1">Muda para uma branch existente</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git merge nome-da-branch</code>
+                    <p className="text-sm text-[#848d97] mt-1">Faz merge da branch especificada para a branch atual</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Histórico */}
+              <div className="space-y-3">
+                <h4 className="font-semibold text-white text-lg">📚 Ver Histórico</h4>
+                <div className="space-y-2">
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git log</code>
+                    <p className="text-sm text-[#848d97] mt-1">Mostra o histórico completo de commits</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git log --oneline</code>
+                    <p className="text-sm text-[#848d97] mt-1">Histórico resumido (uma linha por commit)</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git log --graph --oneline --all</code>
+                    <p className="text-sm text-[#848d97] mt-1">Visualização gráfica de todas as branches</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Remoto */}
+              <div className="space-y-3">
+                <h4 className="font-semibold text-white text-lg">☁️ Sincronizar com Remoto</h4>
+                <div className="space-y-2">
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git push</code>
+                    <p className="text-sm text-[#848d97] mt-1">Envia commits locais para o repositório remoto</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git pull</code>
+                    <p className="text-sm text-[#848d97] mt-1">Baixa e integra mudanças do repositório remoto</p>
+                  </div>
+                  <div className="bg-[#0d1117] p-4 rounded-lg border border-[#2c5282]">
+                    <code className="text-[#79c0ff]">git fetch</code>
+                    <p className="text-sm text-[#848d97] mt-1">Baixa mudanças do remoto sem fazer merge</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#2a4365] p-4 rounded-lg border-l-4 border-[#38a169]">
+                <p className="text-sm text-[#cbd5e0]">
+                  💡 <strong className="text-white">Dica:</strong> Não te preocupes se ainda não dominas todos estes comandos.
+                  Vais praticar cada um deles nos exercícios dos próximos atos!
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Navegação */}
