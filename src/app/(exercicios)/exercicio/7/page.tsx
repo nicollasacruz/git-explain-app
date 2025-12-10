@@ -217,6 +217,24 @@ export default function Exercicio7Page() {
         <div className="space-y-6 mb-8">
           {/* Versão */}
           <Card>
+
+          {/* Skip Option */}
+          <div className="mb-8">
+            <Card className="bg-[#2c5282]/40 border-[#2c5282]">
+              <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4">
+                <div>
+                  <p className="text-white font-semibold">Quer pular esta validação?</p>
+                  <p className="text-sm text-[#cbd5e0]">Avança diretamente para o próximo exercício sem preencher a release.</p>
+                </div>
+                <Link href="/exercicio/8" className="w-full sm:w-auto">
+                  <Button variant="secondary" className="w-full sm:w-auto">
+                    Pular e ir para o Exercício 8
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
             <CardHeader>
               <CardTitle className="text-lg">1. Qual será a próxima versão?</CardTitle>
             </CardHeader>

@@ -163,6 +163,24 @@ export default function Exercicio8Page() {
           </CardContent>
         </Card>
 
+        {/* Skip Option */}
+        <div className="mb-8">
+          <Card className="bg-[#2c5282]/40 border-[#2c5282]">
+            <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4">
+              <div>
+                <p className="text-white font-semibold">Quer pular esta avaliação?</p>
+                <p className="text-sm text-[#cbd5e0]">Avança sem gerar/validar o changelog.</p>
+              </div>
+              <Link href="/" className="w-full sm:w-auto">
+                <Button variant="secondary" className="w-full sm:w-auto">
+                  Pular e voltar ao início
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Resultado */}
         {resultado && (
           <Card
